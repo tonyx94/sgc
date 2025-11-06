@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Inicio de Sesión";
+}
+
+<h2 class="text-center mt-4">SGC - Inicio de Sesión</h2>
+
+<form method="post" class="w-50 mx-auto mt-4">
+    <div class="mb-3">
+        <label>Usuario</label>
+        <input name="username" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Contraseña</label>
+        <input name="password" type="password" class="form-control" required />
+    </div>
+    <button class="btn btn-primary w-100">Ingresar</button>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger mt-3">@ViewBag.Error</div>
+    }
+</form>

@@ -1,0 +1,14 @@
+C:\Users\ASROCK\OneDrive\Desktop\SGC\SGC.Data\bin\Debug\net8.0\SGC.Data.deps.json
+C:\Users\ASROCK\OneDrive\Desktop\SGC\SGC.Data\bin\Debug\net8.0\SGC.Data.runtimeconfig.json
+C:\Users\ASROCK\OneDrive\Desktop\SGC\SGC.Data\bin\Debug\net8.0\SGC.Data.dll
+C:\Users\ASROCK\OneDrive\Desktop\SGC\SGC.Data\bin\Debug\net8.0\SGC.Data.pdb
+C:\Users\ASROCK\OneDrive\Desktop\SGC\SGC.Data\obj\Debug\net8.0\SGC.Data.csproj.AssemblyReference.cache
+C:\Users\ASROCK\OneDrive\Desktop\SGC\SGC.Data\obj\Debug\net8.0\SGC.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASROCK\OneDrive\Desktop\SGC\SGC.Data\obj\Debug\net8.0\SGC.Data.AssemblyInfoInputs.cache
+C:\Users\ASROCK\OneDrive\Desktop\SGC\SGC.Data\obj\Debug\net8.0\SGC.Data.AssemblyInfo.cs
+C:\Users\ASROCK\OneDrive\Desktop\SGC\SGC.Data\obj\Debug\net8.0\SGC.Data.csproj.CoreCompileInputs.cache
+C:\Users\ASROCK\OneDrive\Desktop\SGC\SGC.Data\obj\Debug\net8.0\SGC.Data.dll
+C:\Users\ASROCK\OneDrive\Desktop\SGC\SGC.Data\obj\Debug\net8.0\refint\SGC.Data.dll
+C:\Users\ASROCK\OneDrive\Desktop\SGC\SGC.Data\obj\Debug\net8.0\SGC.Data.pdb
+C:\Users\ASROCK\OneDrive\Desktop\SGC\SGC.Data\obj\Debug\net8.0\SGC.Data.genruntimeconfig.cache
+C:\Users\ASROCK\OneDrive\Desktop\SGC\SGC.Data\obj\Debug\net8.0\ref\SGC.Data.dll

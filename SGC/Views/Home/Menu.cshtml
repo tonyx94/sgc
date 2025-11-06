@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Menú Principal";
+}
+
+<h2 class="text-center mt-4">Bienvenido al Sistema de Gestión de Créditos (SGC)</h2>
+
+<div class="text-center mt-5">
+    <p><strong>Usuario:</strong> @ViewBag.Usuario</p>
+    <p><strong>Rol:</strong> @ViewBag.Rol</p>
+
+    <a href="#" class="btn btn-success m-2">Gestión de Créditos</a>
+    <a href="#" class="btn btn-info m-2">Reportes</a>
+    <a href="/Login/Index" class="btn btn-danger m-2">Cerrar Sesión</a>
+</div>
