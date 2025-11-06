@@ -1,0 +1,42 @@
+# Ignorar archivos temporales, binarios y carpetas de Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Carpetas de compilación
+bin/
+obj/
+Debug/
+Release/
+[Bb]uild/
+[Tt]emp/
+
+# Archivos de caché
+*.dbmdl
+*.cache
+*.log
+*.vsidx
+*.vsp
+*.psess
+*.pidb
+*.pdb
+*.db
+*.mdf
+*.ldf
+*.jfm
+*.ncb
+*.opendb
+*.vssscc
+_ReSharper*/
+*.resx
+
+# Publicaciones
+publish/
+wwwroot/lib/
+node_modules/
+
+# Configuración local
+appsettings.Development.json
+secrets.json
