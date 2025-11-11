@@ -17,17 +17,24 @@ namespace SGC.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(string username, string password)
         {
-            var userDto = await _loginService.ValidarUsuarioAsync(username, password);
-
-            if (userDto != null)
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
-                TempData["Usuario"] = userDto.Username;
-                TempData["Rol"] = userDto.Rol;
+                ViewBag.Error = "Debe ingresar el usuario y la contraseña.";
+                return View();
+            }
+
+            var user = await _loginService.ValidarUsuarioAsync(username, password);
+
+            if (user != null)
+            {
+                TempData["Usuario"] = user.Username;
+                TempData["Rol"] = user.Rol;
                 return RedirectToAction("Menu", "Home");
             }
 
-            ViewBag.Error = "Usuario o contraseña incorrectos";
+            ViewBag.Error = "Usuario o contraseña incorrectos. Intente nuevamente.";
             return View();
         }
+
     }
 }

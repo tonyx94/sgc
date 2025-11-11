@@ -1,14 +1,16 @@
 ﻿@{
-    ViewData["Title"] = "Menú Principal";
+    ViewData["Title"] = "Panel Principal";
 }
 
-<h2 class="text-center mt-4">Bienvenido al Sistema de Gestión de Créditos (SGC)</h2>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-<div class="text-center mt-5">
-    <p><strong>Usuario:</strong> @ViewBag.Usuario</p>
-    <p><strong>Rol:</strong> @ViewBag.Rol</p>
+<div class="container text-center mt-5">
+    <h2 class="mb-3">Bienvenido al <strong>SGC - Seguimiento de Créditos</strong></h2>
+    <h5 class="text-muted mb-4">Usuario: @TempData["Usuario"] (@TempData["Rol"])</h5>
 
-    <a href="#" class="btn btn-success m-2">Gestión de Créditos</a>
-    <a href="#" class="btn btn-info m-2">Reportes</a>
-    <a href="/Login/Index" class="btn btn-danger m-2">Cerrar Sesión</a>
+    <div class="d-flex justify-content-center gap-3 flex-wrap mt-4">
+        <a href="#" class="btn btn-success btn-lg shadow"><i class="fa-solid fa-file-invoice"></i> Gestión de Créditos</a>
+        <a href="#" class="btn btn-info btn-lg shadow"><i class="fa-solid fa-chart-line"></i> Reportes</a>
+        <a href="/Login/Index" class="btn btn-danger btn-lg shadow"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a>
+    </div>
 </div>
