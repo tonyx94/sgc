@@ -6,11 +6,22 @@
 
 <div class="container text-center mt-5">
     <h2 class="mb-3">Bienvenido al <strong>SGC - Seguimiento de Créditos</strong></h2>
-    <h5 class="text-muted mb-4">Usuario: @TempData["Usuario"] (@TempData["Rol"])</h5>
+    <h5 class="text-muted mb-4">
+        Usuario: @ViewBag.Usuario (@ViewBag.Rol)
+    </h5>
+
 
     <div class="d-flex justify-content-center gap-3 flex-wrap mt-4">
         <a href="#" class="btn btn-success btn-lg shadow"><i class="fa-solid fa-file-invoice"></i> Gestión de Créditos</a>
         <a href="#" class="btn btn-info btn-lg shadow"><i class="fa-solid fa-chart-line"></i> Reportes</a>
         <a href="/Login/Index" class="btn btn-danger btn-lg shadow"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a>
+        
+        @if (ViewBag.Rol == "Admin")
+        {
+            <a href="/Usuario" class="btn btn-dark btn-lg shadow">
+                Usuarios
+            </a>
+        }
+
     </div>
 </div>

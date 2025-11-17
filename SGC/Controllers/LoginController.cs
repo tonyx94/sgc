@@ -27,8 +27,8 @@ namespace SGC.Web.Controllers
 
             if (user != null)
             {
-                TempData["Usuario"] = user.Username;
-                TempData["Rol"] = user.Rol;
+                HttpContext.Session.SetString("Usuario", user.Username);
+                HttpContext.Session.SetString("Rol", user.Rol);
                 return RedirectToAction("Menu", "Home");
             }
 

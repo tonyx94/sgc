@@ -26,7 +26,9 @@ builder.Services.AddSingleton(mapper);
 
 // Servicios
 builder.Services.AddScoped<LoginService>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
+builder.Services.AddSession();
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -34,6 +36,8 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
 }
 app.UseStaticFiles();
+app.UseSession();
+
 app.UseRouting();
 app.UseAuthorization();
 

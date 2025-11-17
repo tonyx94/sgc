@@ -1,0 +1,45 @@
+﻿@model SGC.Business.Dtos.UsuarioDTO
+
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+<h2 class="mb-3">Editar Usuario</h2>
+
+<form method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input asp-for="Username" class="form-control" />
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Password (opcional)</label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <small class="text-muted">Si no desea cambiar la contraseña, deje este campo vacío.</small>
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Rol</label>
+        <select asp-for="Rol" class="form-select">
+            <option value="Admin">Admin</option>
+            <option value="ServicioCliente">Servicio Cliente</option>
+            <option value="Analista">Analista</option>
+            <option value="Gestor">Gestor</option>
+        </select>
+        <span asp-validation-for="Rol" class="text-danger"></span>
+    </div>
+
+    <button class="btn btn-warning">Guardar Cambios</button>
+    <a href="/Usuario" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
