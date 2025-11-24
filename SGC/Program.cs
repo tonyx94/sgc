@@ -27,6 +27,7 @@ builder.Services.AddSingleton(mapper);
 // Servicios
 builder.Services.AddScoped<LoginService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<ClienteService>();
 
 builder.Services.AddSession();
 var app = builder.Build();

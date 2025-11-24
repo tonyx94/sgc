@@ -14,7 +14,7 @@ namespace SGC.Data
         public SGCDbContext(DbContextOptions<SGCDbContext> options) : base(options) { }
 
         public DbSet<Usuario> Usuarios { get; set; }
-
+        public DbSet<Cliente> Clientes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -48,6 +48,34 @@ namespace SGC.Data
                     Rol = "Supervisor"
                 }
             );
+
+            // Seed Data - Clientes
+            modelBuilder.Entity<Cliente>().HasData(
+                new Cliente
+                {
+                    Id = 1,
+                    Identificacion = "101110111",
+                    Nombre = "Carlos",
+                    Apellido = "Mora",
+                    Email = "carlos.mora@email.com",
+                    Telefono = "88887777",
+                    Direccion = "San José, Costa Rica",
+                    FechaRegistro = new DateTime(2024, 11, 1),
+                    Activo = true
+                },
+                new Cliente
+                {
+                    Id = 2,
+                    Identificacion = "202220222",
+                    Nombre = "Ana",
+                    Apellido = "González",
+                    Email = "ana.gonzalez@email.com",
+                    Telefono = "77776666",
+                    Direccion = "Heredia, Costa Rica",
+                    FechaRegistro = new DateTime(2024, 11, 5),
+                    Activo = true
+                }
+                );
         }
     }
 }
