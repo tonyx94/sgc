@@ -29,6 +29,7 @@ namespace SGC.Web.Controllers
             {
                 HttpContext.Session.SetString("Usuario", user.Username);
                 HttpContext.Session.SetString("Rol", user.Rol);
+                HttpContext.Session.SetInt32("UsuarioId", user.Id);
                 return RedirectToAction("Menu", "Home");
             }
 

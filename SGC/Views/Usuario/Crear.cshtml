@@ -4,44 +4,82 @@
     ViewData["Title"] = "Crear Usuario";
 }
 
-<h2 class="mb-3">Crear Usuario</h2>
-
-@if (ViewBag.Error != null)
-{
-    <div class="alert alert-danger">@ViewBag.Error</div>
-}
-
-<form method="post">
-
-    <div class="mb-3">
-        <label class="form-label">Username</label>
-        <input asp-for="Username" class="form-control" />
-        <span asp-validation-for="Username" class="text-danger"></span>
-    </div>
-    
-
-
-    <div class="mb-3">
-        <label class="form-label">Password</label>
-        <input asp-for="Password" type="password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
+<div class="container mt-5">
+    <div class="mb-4">
+        <h2 class="fw-light mb-0">Crear Nuevo Usuario</h2>
+        <p class="text-muted small">Complete el formulario para registrar un nuevo usuario</p>
     </div>
 
-    <div class="mb-3">
-        <label class="form-label">Rol</label>
-        <select asp-for="Rol" class="form-select">
-            <option value="Admin">Admin</option>
-            <option value="ServicioCliente">Servicio Cliente</option>
-            <option value="Analista">Analista</option>
-            <option value="Gestor">Gestor</option>
-        </select>
-        <span asp-validation-for="Rol" class="text-danger"></span>
-    </div>
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show rounded-3" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>@ViewBag.Error
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
 
-    <button class="btn btn-success">Crear</button>
-    <a href="/Usuario" class="btn btn-secondary">Cancelar</a>
-</form>
+    <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-body p-4">
+            <form method="post" id="formCrearUsuario">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label small text-muted fw-semibold">Nombre de Usuario</label>
+                        <input asp-for="Username" class="form-control border-0 bg-light" placeholder="Ingrese el nombre de usuario" />
+                        <span asp-validation-for="Username" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label small text-muted fw-semibold">Contraseña</label>
+                        <input asp-for="Password" type="password" class="form-control border-0 bg-light" placeholder="Ingrese la contraseña" />
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label small text-muted fw-semibold">Rol del Usuario</label>
+                        <select asp-for="Rol" class="form-select border-0 bg-light">
+                            <option value="">Seleccione un rol...</option>
+                            <option value="Administrador">Administrador</option>
+                            <option value="ServicioCliente">Servicio Cliente</option>
+                            <option value="Analista">Analista</option>
+                            <option value="Gestor">Gestor</option>
+                        </select>
+                        <span asp-validation-for="Rol" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2 mt-4">
+                    <button type="submit" class="btn btn-dark rounded-pill px-4">
+                        <i class="bi bi-check-lg me-1"></i> Crear Usuario
+                    </button>
+                    <a href="/Usuario" class="btn btn-outline-secondary rounded-pill px-4">
+                        <i class="bi bi-x-lg me-1"></i> Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.getElementById('formCrearUsuario').addEventListener('submit', function(e) {
+            if (!this.checkValidity()) {
+                return;
+            }
+            
+            e.preventDefault();
+            
+            Swal.fire({
+                title: 'Creando Usuario...',
+                text: 'Por favor espere',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+            
+            this.submit();
+        });
+    </script>
 }
-

@@ -15,16 +15,17 @@ namespace SGC.Data
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Solicitud> Solicitudes { get; set; }
+        public DbSet<SolicitudBitacora> SolicitudBitacoras { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Índice único para evitar duplicados
+
             modelBuilder.Entity<Usuario>()
                 .HasIndex(u => u.Username)
                 .IsUnique();
 
-            // Datos iniciales (Seed Data)
             modelBuilder.Entity<Usuario>().HasData(
                 new Usuario
                 {
@@ -49,7 +50,6 @@ namespace SGC.Data
                 }
             );
 
-            // Seed Data - Clientes
             modelBuilder.Entity<Cliente>().HasData(
                 new Cliente
                 {

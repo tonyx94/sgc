@@ -16,7 +16,7 @@ namespace SGC.Web.Controllers
         }
         private bool EsAdmin()
         {
-            return HttpContext.Session.GetString("Rol") == "Admin";
+            return HttpContext.Session.GetString("Rol") == "Administrador";
         
         }
 

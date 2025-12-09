@@ -1,28 +1,45 @@
-﻿/* ===== LOGIN PAGE STYLES ===== */
+﻿/* ===== PREMIUM MINIMALIST LOGIN STYLES ===== */
 
 body {
-    background: linear-gradient(-45deg, #0056b3, #0099ff, #00c6ff, #0062ff);
-    background-size: 400% 400%;
-    animation: gradientMove 10s ease infinite;
+    /* Sophisticated gradient background */
+    background: radial-gradient(circle at 10% 20%, rgb(0, 0, 0) 0%, rgb(18, 18, 18) 90.2%);
+    background-size: cover;
     height: 100vh;
     margin: 0;
     overflow: hidden;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    color: #e0e0e0;
 }
 
-/* Fondo animado */
-@keyframes gradientMove {
-    0% {
-        background-position: 0% 50%;
-    }
+/* Abstract animated background elements */
+body::before, body::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(100px);
+    opacity: 0.6;
+    animation: float 10s infinite alternate;
+}
 
-    50% {
-        background-position: 100% 50%;
-    }
+body::before {
+    background: #007bff;
+    top: 10%;
+    left: 20%;
+}
 
-    100% {
-        background-position: 0% 50%;
-    }
+body::after {
+    background: #6610f2;
+    bottom: 15%;
+    right: 20%;
+    animation-delay: -5s;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(30px, 50px); }
 }
 
 /* Centrado perfecto */
@@ -32,25 +49,29 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
+/* GLASSPHORISHM CARD */
 .login-card {
-    background: white;
-    padding: 2.5rem;
-    border-radius: 1rem;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
     width: 100%;
-    max-width: 420px;
-    animation: fadeIn 1s ease-in-out;
+    max-width: 400px;
+    animation: fadeInUp 0.8s ease-out;
 }
 
-/* Animación de entrada */
-@keyframes fadeIn {
+@keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(20px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -59,53 +80,114 @@ main {
 
 .logo {
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
-    .logo img {
-        width: 90px;
-        border-radius: 50%;
-        margin-bottom: 10px;
-    }
+.logo img {
+    width: 70px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
 
 h4 {
-    color: #003366;
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
 }
 
 p.text-muted {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6) !important;
     margin-bottom: 1.5rem;
 }
 
-.form-control:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 0.15rem rgba(0, 123, 255, .25);
+/* FORM INPUTS */
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #ccc;
 }
 
-.btn-primary {
-    background-color: #007bff;
-    border: none;
+.form-control {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    color: #fff;
+    padding: 0.75rem 1rem;
     transition: all 0.3s ease;
 }
 
-    .btn-primary:hover {
-        background-color: #0056b3;
-        transform: translateY(-2px);
-    }
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #007bff;
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+    color: #fff;
+}
+
+/* BUTTON */
+.btn-primary {
+    background: linear-gradient(135deg, #007bff 0%, #0062cc 100%);
+    border: none;
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #0062cc 0%, #004a99 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.6);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* EXTRAS */
+.form-check-input {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.form-check-input:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.form-check-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+}
+
+a.text-primary {
+    color: #6ea8fe !important; /* Bootstrap lighter blue for dark mode */
+    transition: color 0.2s;
+}
+
+a.text-primary:hover {
+    color: #9ec5fe !important;
+}
 
 .footer-text {
-    font-size: 0.85rem;
-    color: #777;
-    margin-top: 1rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 2rem;
     text-align: center;
 }
 
-/* Footer general del layout */
-footer {
-    position: fixed;
-    bottom: 10px;
-    width: 100%;
-    text-align: center;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
+/* RESPONSIVE */
+@media (max-width: 576px) {
+    .login-card {
+        padding: 2rem;
+        width: 90%;
+    }
 }

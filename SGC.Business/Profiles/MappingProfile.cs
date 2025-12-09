@@ -15,7 +15,6 @@ namespace SGC.Business.Profiles
         public MappingProfile()
         {
 
-            // cliente
             CreateMap<Cliente, ClienteDTO>();
             CreateMap<ClienteDTO, Cliente>();
 

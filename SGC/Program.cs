@@ -1,35 +1,36 @@
-using AutoMapper;                    // <-- este sí
+ï»¿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SGC.Data;
 using SGC.Business.Services;
 using SGC.Business.Profiles;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-// DB
 builder.Services.AddDbContext<SGCDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), 
+    new MySqlServerVersion(new Version(8, 0, 21))));
 
-// AutoMapper (registro manual, SIN AddAutoMapper)
 var mapperConfig = new MapperConfiguration(cfg =>
 {
-    // puedes cargar por perfil explícito…
     cfg.AddProfile<MappingProfile>();
-    // …o por ensamblados, si prefieres:
-    // cfg.AddMaps(typeof(MappingProfile).Assembly);
 });
 
 IMapper mapper = mapperConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 
-// Servicios
 builder.Services.AddScoped<LoginService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<ClienteService>();
+builder.Services.AddScoped<ISolicitudService, SolicitudService>();
 
-builder.Services.AddSession();
+builder.Services.AddSession(options => {
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -45,5 +46,20 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Login}/{action=Index}/{id?}");
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<SGCDbContext>();
+        context.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while upgrading the database.");
+    }
+}
 
 app.Run();

@@ -2,26 +2,174 @@
     ViewData["Title"] = "Panel Principal";
 }
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<style>
+    .menu-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    
+    .welcome-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+    
+    .welcome-header h2 {
+        font-weight: 300;
+        color: #2c3e50;
+        font-size: 2.5rem;
+    }
+    
+    .welcome-header strong {
+        font-weight: 700;
+        color: #0d6efd;
+    }
+    
+    .user-badge {
+        display: inline-flex;
+        align-items: center;
+        background: #f8f9fa;
+        padding: 10px 25px;
+        border-radius: 50px;
+        color: #6c757d;
+        font-size: 1rem;
+        margin-top: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        border: 1px solid rgba(0,0,0,0.05);
+    }
 
-<div class="container text-center mt-5">
-    <h2 class="mb-3">Bienvenido al <strong>SGC - Seguimiento de Créditos</strong></h2>
-    <h5 class="text-muted mb-4">
-        Usuario: @ViewBag.Usuario (@ViewBag.Rol)
-    </h5>
+    .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        padding: 10px;
+    }
 
+    .menu-card {
+        background: white;
+        border-radius: 24px;
+        padding: 45px 30px;
+        text-align: center;
+        text-decoration: none;
+        color: #495057;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border: 1px solid rgba(0,0,0,0.04);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
 
-    <div class="d-flex justify-content-center gap-3 flex-wrap mt-4">
-        <a href="#" class="btn btn-success btn-lg shadow"><i class="fa-solid fa-file-invoice"></i> Gestión de Créditos</a>
-        <a href="#" class="btn btn-info btn-lg shadow"><i class="fa-solid fa-chart-line"></i> Reportes</a>
-        <a href="/Login/Index" class="btn btn-danger btn-lg shadow"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a>
+    .menu-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: #0d6efd;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .menu-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(13, 110, 253, 0.1);
+        color: #0d6efd;
+        border-color: transparent;
+    }
+
+    .menu-card:hover::before {
+        opacity: 1;
+    }
+
+    .menu-card i {
+        font-size: 3.5rem;
+        margin-bottom: 25px;
+        background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        opacity: 0.9;
+        transition: all 0.4s ease;
+    }
+
+    .menu-card:hover i {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    .menu-card h3 {
+        font-size: 1.35rem;
+        font-weight: 600;
+        margin: 0;
+        letter-spacing: -0.5px;
+    }
+
+    .menu-card.logout:hover {
+        color: #dc3545;
+        box-shadow: 0 20px 40px rgba(220, 53, 69, 0.1);
+    }
+    
+    .menu-card.logout::before {
+        background: #dc3545;
+    }
+    
+    .menu-card.logout i {
+        background: linear-gradient(135deg, #dc3545 0%, #a71d2a 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+</style>
+
+<div class="menu-container">
+    <div class="welcome-header">
+        <h2>Bienvenido a <strong>SGC</strong></h2>
+        <div class="user-badge">
+            <i class="fa-solid fa-user-circle me-2"></i> @ViewBag.Usuario <span class="mx-2">|</span> @ViewBag.Rol
+        </div>
+    </div>
+
+    <div class="menu-grid">
         
-        @if (ViewBag.Rol == "Admin")
+      
+        <a href="@Url.Action("Index", "Cliente")" class="menu-card">
+            <i class="fa-solid fa-users"></i>
+            <h3>Clientes</h3>
+        </a>
+
+        <a href="@Url.Action("Crear", "Solicitud")" class="menu-card">
+            <i class="fa-solid fa-plus-circle"></i>
+            <h3>Nueva Solicitud</h3>
+        </a>
+
+        <a href="@Url.Action("Index", "Solicitud")" class="menu-card">
+            <i class="fa-solid fa-file-invoice"></i>
+            <h3>Gestión de Créditos</h3>
+        </a>
+
+
+        <!-- <a href="#" class="menu-card">
+            <i class="fa-solid fa-chart-line"></i>
+            <h3>Reportes</h3>
+        </a> -->
+        
+        @if (ViewBag.Rol == "Administrador")
         {
-            <a href="/Usuario" class="btn btn-dark btn-lg shadow">
-                Usuarios
+            <a href="@Url.Action("Index", "Usuario")" class="menu-card">
+                <i class="fa-solid fa-user-gear"></i>
+                <h3>Usuarios</h3>
             </a>
         }
+
+        <a href="@Url.Action("Index", "Login")" class="menu-card logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <h3>Cerrar Sesión</h3>
+        </a>
 
     </div>
 </div>

@@ -1,0 +1,56 @@
+Enunciado
+Desarrollo de un sistema para administración de solicitudes de
+crédito “SGC Seguimiento gestiones de crédito”
+Le han contratado para desarrollar el software para el manejo de las solicitudes de
+gestiones de crédito. Le han compartido las siguientes especificaciones
+Log In
+Permitirá ingresar a los usuarios al sistema
+Administración de clientes
+Los usuarios de todos los roles van a poder crear,actualizar, borrar y mostrar
+clientes
+Administración de usuarios
+Usuarios con el rol administrador podrán ingresar a esta pantalla, en ella se
+permitirá crear, actualizar, borrar y mostrar los usuarios
+Pantalla creación de solicitudes de crédito
+En esta pantalla ingresarán los usuarios con el rol de “servicio al cliente”. Al
+momento de contactar al cliente y que este este interesado en adquirir alguno de nuestros
+productos se creará una solicitud de crédito. Para esto es necesaria la siguiente
+información del cliente. Identificación, Monto del crédito, comentarios y documentos
+Esta pantalla tiene las siguientes reglas de negocio
+• No debe permitir ingresar una solicitud de crédito si ya tiene una en estado
+“registrado o devolución”. Deberá mostrar el mensaje “El usuario con identificación
+xxxxxxx ya cuenta con la solicitud de crédito xxx, por favor resolver la gestión antes
+de ingresar otra nueva”
+• No debe permitir ingresar solicitud de crédito por un monto mayor a 10.000.000
+colones
+Pantalla seguimiento de gestiones de crédito
+En esta pantalla ingresarán todas las solicitudes, los usuarios que tengan rol de
+analista podrán ver todas las solicitudes que tengan estado “Ingresado” y “Devolución”,
+Los analistas abrirán la solicitud y posteriormente de hacerle el proceso
+correspondiente (adjuntar documentos) la enviaran a aprobación, es decir la solicitud
+cambiará a estado “enviado aprobación”.
+Los usuarios con rol de gestor podrán ver todas las solicitudes que tengan estado
+“enviado aprobación”.
+En caso de que todo este correctamente el gestor la aprobará y quedara en estado
+aprobado, en caso contrario podrá poner un comentario y le pondrá el estado de
+“Devolución” para reprocesarla
+Los usuarios con rol admin, podrán realizar todas las acciones y ver todas las
+solicitudes
+El departamento de experiencia de usuario le ha solicitado cumplir con lo siguiente
+o Evitar recarga de la página para modificar la solicitud, realizar todos los
+procesos utilizando ventanas modales y javascript (SweetAlert2)
+
+Reporte gestiones de crédito
+Para que el proceso quede completamente transparente, desde que se crea la solicitud debe haber un tracking de todos los movimientos que se le han realizado a la gestión. Por lo que, se debe crear un reporte en donde al colocar el número de gestión me aparezcan todas sus modificaciones, por ejemplo
+
+Gestión - Acción - Comentario - Usuario
+11552 - Crear - Se crea la gestión para el cliente… - Usuario1(SC)
+11552 - Enviada aprobación - Se realiza el análisis y se envía aprobación - Usuario2(Analista)
+11552 - Devolución - Falta adjunta VB de negocio - Usuario3(Gestor)
+11552 - Enviada - aprobación Se realiza la corrección - Usuario2(Analista)
+11552 - Aprobada - Se acepta la gestión - Usuario3(Gestor)
+
+Estándares y buenas practicas
+• Debe utilizar el patrón de diseño MVC con la arquitectura con capas (presentación, lógica de negocio, datos)
+• No puede haber lógica de negocio en los controladores
+• Debe cumplir con el escaneo de código seguro sonarqube

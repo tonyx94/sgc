@@ -1,0 +1,85 @@
+@{
+    ViewData["Title"] = "Crear Solicitud";
+}
+
+<div class="container mt-4">
+    <h2>Nueva Solicitud de Crédito</h2>
+    <div class="card p-4">
+        <form id="crearSolicitudForm">
+  
+            <div class="mb-3">
+                <label for="clienteId" class="form-label">Cliente</label>
+                <select class="form-select" id="clienteId" required>
+                    <option value="">Seleccione un cliente...</option>
+                    @if (ViewBag.Clientes != null)
+                    {
+                        foreach (var cliente in ViewBag.Clientes)
+                        {
+                            <option value="@cliente.Id">@cliente.Nombre @cliente.Apellido - @cliente.Identificacion</option>
+                        }
+                    }
+                </select>
+                <div class="form-text">Seleccione el cliente para la solicitud.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="monto" class="form-label">Monto del Crédito</label>
+                <input type="number" class="form-control" id="monto" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="comentarios" class="form-label">Comentarios</label>
+                <textarea class="form-control" id="comentarios" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="documentos" class="form-label">Documento Adjunto</label>
+                <input type="file" class="form-control" id="documentos" name="Archivo">
+                <div class="form-text">Suba un documento de soporte (PDF, Imagen, etc.)</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Crear Solicitud</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('crearSolicitudForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData();
+            formData.append('ClienteId', document.getElementById('clienteId').value);
+            formData.append('Monto', document.getElementById('monto').value);
+            formData.append('Comentarios', document.getElementById('comentarios').value);
+            
+            const fileInput = document.getElementById('documentos');
+            if (fileInput.files.length > 0) {
+                formData.append('Archivo', fileInput.files[0]);
+            }
+
+            const response = await fetch('@Url.Action("Crear", "Solicitud")', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Creado',
+                    text: 'Solicitud creada correctamente'
+                }).then(() => {
+                    window.location.href = '@Url.Action("Index", "Solicitud")';
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: result.message
+                });
+            }
+        });
+    </script>
+}

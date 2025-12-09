@@ -1,47 +1,44 @@
 ﻿@{
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
-    ViewData["Title"] = "Inicio de Sesión - SGC";
+    ViewData["Title"] = "Iniciar Sesión";
 }
 
 <div class="login-card">
     <div class="logo">
-        <img src="https://cdn-icons-png.flaticon.com/512/639/639365.png" alt="SGC Logo" />
-        <h4><strong>SGC</strong> - Sistema de Gestión de Créditos</h4>
-        <p class="text-muted">Ingrese sus credenciales para continuar</p>
+        @* <img src="https://cdn-icons-png.flaticon.com/512/9326/9326922.png" alt="SGC Logo" /> *@
+        <h4>Bienvenido</h4>
+        <p class="text-muted">Accede a tu cuenta</p>
     </div>
 
     <form method="post" id="loginForm">
         <div class="form-group mb-3">
-            <label><i class="fa-solid fa-user"></i> Usuario</label>
-            <input type="text" name="username" class="form-control" placeholder="Ingrese su usuario" required />
-        </div>
-
-        <div class="form-group mb-3">
-            <label><i class="fa-solid fa-lock"></i> Contraseña</label>
-            <input type="password" name="password" class="form-control" placeholder="Ingrese su contraseña" required />
-        </div>
-
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="remember" />
-                <label class="form-check-label" for="remember">Recordarme</label>
+            <label>Usuario</label>
+            <div class="input-group">
+                <input type="text" name="username" class="form-control" placeholder="nombre de usuario" required autocomplete="off" />
             </div>
-            <a href="#" class="text-decoration-none small text-primary">¿Olvidó su contraseña?</a>
         </div>
+
+        <div class="form-group mb-4">
+            <label>Contraseña</label>
+            <div class="input-group">
+                <input type="password" name="password" class="form-control" placeholder="••••••••" required />
+            </div>
+        </div>
+
+        
 
         <button type="submit" class="btn btn-primary w-100" id="btnLogin">
-            <i class="fa-solid fa-right-to-bracket"></i> Ingresar
+            Ingresar
         </button>
 
         @if (ViewBag.Error != null)
         {
-            <div class="alert alert-danger text-center mt-3">@ViewBag.Error</div>
+            <div class="alert alert-danger text-center mt-3 py-2 small" style="background: rgba(220, 53, 69, 0.1); border: 1px solid rgba(220, 53, 69, 0.2); color: #ea868f;">
+                @ViewBag.Error
+            </div>
         }
     </form>
 
-    <div class="footer-text">
-        © @DateTime.Now.Year - <strong>SGC</strong> | Todos los derechos reservados.
-    </div>
 </div>
 
 <script>
@@ -49,7 +46,16 @@
     const form = document.getElementById("loginForm");
 
     form.addEventListener("submit", () => {
-        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Iniciando...';
+        const originalText = btn.innerText;
+        btn.innerText = 'Verificando...';
+        btn.style.opacity = '0.7';
         btn.disabled = true;
+        
+      
+        setTimeout(() => {
+            btn.disabled = false;
+            btn.innerText = originalText;
+            btn.style.opacity = '1';
+        }, 5000); 
     });
 </script>
